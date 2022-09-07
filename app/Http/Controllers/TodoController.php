@@ -13,7 +13,6 @@ class TodoController extends Controller
         $todos = Todo::all();
         return view('index', ['todos' => $todos]);
     }
-}
 
 public function create(TodoRequest $request)
     {
@@ -29,9 +28,10 @@ public function create(TodoRequest $request)
         $todo = Todo::find($request->id)->update($form);
         return redirect('/');
     }
-    
+
     public function remove(Request $request)
     {
-        Todo::find($request->id)->delete();
+        $todo = Todo::find($request->id)->delete();
         return redirect('/');
     }
+}

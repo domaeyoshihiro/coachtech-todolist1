@@ -18,8 +18,6 @@
     color: black;
     background-color: white;
   }
-  .upper_table {
-  }
 
   .textbox_add-btn {
     padding: 10px 20px 20px;
@@ -30,14 +28,14 @@
 
 <body>
   <div class="todolist">
-    <div class="upper_table">
+    <div class="upper_main">
       <h1>Todo List</h1>
         <div class="textbox_add-btn">
           <ul>
-            <li>
-            {{$error}}
-            </li>
-          </ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
       <form action="/add" method="POST">
       @csrf
       <input type="text" name="textbox" >
@@ -45,7 +43,7 @@
       </form>
       </div>
     </div>
-    <div class="bottom_table">
+    <div class="bottom_main">
       <table>
       <tr>
         <th>作成日</th>
@@ -59,15 +57,18 @@
           {{$todo->created_at}}
         </td>
         <td>
-          {{$todo->content}}
+          <input type="text" name="content" value="{{$todo->content}}">
         </td>
         <td><form action="/edit" method="POST">
+          @csrf
           <button type="submit" name="updata-btn">更新</button>
         </form>
-        </td><form action="/delete" method="POST">
+        </td>
+        <td><form action="/delete" method="POST">
+          @csrf
           <button type="submit" name="remove-btn">削除</button>
         </form>
-        <td>
+        </td>
       </tr>
         @endforeach
       </table>
