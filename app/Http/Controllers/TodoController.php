@@ -25,13 +25,13 @@ public function create(TodoRequest $request)
     {
         $form = $request->all();
         unset($form['_token']);
-        $todo = Todo::find($request->id)->update($form);
+        Todo::find($request->id)->update($form);
         return redirect('/');
     }
 
     public function remove(Request $request)
     {
-        $todo = Todo::find($request->id)->delete();
+        Todo::find($request->id)->delete();
         return redirect('/');
     }
 }
