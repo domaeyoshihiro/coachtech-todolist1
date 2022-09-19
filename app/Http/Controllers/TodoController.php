@@ -3,21 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\TodoRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         $todos = Todo::all();
-        return view('index', ['todos' => $todos]);
+        $tags = Tag::all();
+
+        $param = ['todos' => $todos,'tags' => $tags, 'user' => $user];
+        return view('index', $param);
     }
 
 public function create(TodoRequest $request)
     {
         $form = $request->all();
         Todo::create($form);
+        Tag::create($form);
         return redirect('/');
     }
 
@@ -33,5 +40,20 @@ public function create(TodoRequest $request)
     {
         Todo::find($request->id)->delete();
         return redirect('/');
+    }
+
+    public function find()
+    {
+        return view('/find', ['input' => '']);
+    }
+
+    public function search(Request $request)
+    {
+        $todo = Todo::where('content', 'LIKE BINARY',"%{$request->input}%")->get();
+        $param = [
+            'input' => $request->input,
+            'todo' => $todo
+        ];
+        return view('/find', $param);
     }
 }

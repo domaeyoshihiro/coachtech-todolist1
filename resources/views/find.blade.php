@@ -46,7 +46,7 @@
     height: 30px;
   }
 
-  .create__btn {
+  .search__btn {
     border: 2px solid	#BA55D3;
     border-radius: 3px;
     background-color: white;
@@ -58,7 +58,7 @@
     transition: .3s;
   }
 
-  .create__btn:hover {
+  .search__btn:hover {
     background-color:	#BA55D3;
     color: white;
   }
@@ -144,21 +144,20 @@
     color: white;
   }
 
-  .find__btn {
-    border: 2px solid	#ADFF2F;
+  .back__btn {
+    border: 2px solid	#696969;
     border-radius: 3px;
     background-color: white;
-    color: #ADFF2F;
+    color: #696969;
     font-weight: bold;
     font-size: 12px;
-    padding: 8px 15px;
-    margin-bottom: 10px;
+    padding: 5px 15px;
     cursor: pointer;
     transition: .3s;
   }
 
-  .find__btn:hover {
-    background-color:	#ADFF2F;
+  .back__btn:hover {
+    background-color:	#696969;
     color: white;
   }
 
@@ -169,13 +168,10 @@
   <div class="todolist">
     <div class="upper_main">
       <div class="todo__header">
-        <h1>Todo List</h1>
+        <h1>タスク検索</h1>
           <div class="login__header">
-            @if (Auth::check())
-              <p class="login__detail">「{{$user->name}}」でログイン中</p>
-            @else
-              <p class="login__detail">ログインしてください（<a href="/login">ログイン</a>|<a href="/register">登録</a>）</p>
-            @endif
+
+
             <form action="{{ route('logout') }}" method="post">
             @csrf
             <button type="submit" name="lgout-btn" class="logout__btn">ログアウト</button>
@@ -183,21 +179,17 @@
           </div>
       </div>
 
-      <form action="/find" method="GET" class="find-btn">
-        @csrf
-        <button type="submit" name="find-btn" class="find__btn">タスク検索</button>
-      </form>
-
         <div class="textbox_add-btn">
           <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
           </ul>
-          <form action="/add" method="POST" class="upper__taskbox">
+
+          <form action="{{ route('search') }}" method="GET" class="upper__taskbox">
             @csrf
-            <input type="text" name="content" class="task__text">
-            <td>
+            <input type="text" name="input" value="{{$input}}" class="task__text">
+            
             <select name="tag">
               <option value="1">家事</option>
               <option value="2">勉強</option>
@@ -205,22 +197,22 @@
               <option value="4">食事</option>
               <option value="5">移動</option>
             </select>
-          </td>
-
-            <button type="submit" name="create-btn" class="create__btn">追加</button>
+          
+            <button type="submit" name="search-btn" class="search__btn">検索</button>
           </form>
+      
     </div>
-
     <div class="bottom_main">
       <table>
         <tr>
           <th>作成日</th>
           <th>タスク名</th>
-          <th>タグ<th>
+          <th>タグ</th>
           <th>更新</th>
           <th>削除</th>
         </tr>
-        @foreach ($todos as $todo)
+        
+        @if (@isset($todo))
         <tr>
           <td>
             {{$todo->created_at}}
@@ -230,12 +222,15 @@
           <td>
             <input type="text" name="content" value="{{$todo->content}}" class="content__text">
           </td>
+
           <td>
-            <select  name="tag">
-            @foreach ($tags as $tag)
-                <option value="{{ $tag->tag }}"></option>
-            @endforeach
-        </select>
+            <select name="tag">
+              <option value="1">家事</option>
+              <option value="2">勉強</option>
+              <option value="3">運動</option>
+              <option value="4">食事</option>
+              <option value="5">移動</option>
+            </select>
           </td>
 
           <td>
@@ -248,10 +243,14 @@
           </form>
           </td>
         </tr>
-        @endforeach
+        @endif
       </table>
     </div>
   </div>
+    <form action="/" method="GET" class="back-btn">
+      @csrf
+      <button type="submit" name="back-btn" class="back__btn">戻る</button>
+    </form>
 </div>
 </body>
 </html>
