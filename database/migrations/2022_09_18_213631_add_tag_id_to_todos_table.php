@@ -14,7 +14,7 @@ class AddTagIdToTodosTable extends Migration
     public function up()
     {
         Schema::table('todos', function (Blueprint $table) {
-            $table->bigint('tag_id')->unsigned();
+            $table->bigInteger('tag_id')->unsigned();
             $table->foreign('tag_id')->references('tag_id')->on('tags')->OnDelete('cascade');
         });
     }

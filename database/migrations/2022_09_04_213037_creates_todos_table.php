@@ -14,12 +14,14 @@ class CreatesTodosTable extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('content', 20);
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });
+
     }
+    
 
     /**
      * Reverse the migrations.
@@ -29,5 +31,6 @@ class CreatesTodosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('todos');
+
     }
 }
