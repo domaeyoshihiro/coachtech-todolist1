@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Todo extends Model
 {
     use HasFactory;
-    protected $fillable = ['content'];
+    protected $fillable = ['content', 'tag_id', 'user_id'];
 
     public function tag(){
     return $this->belongsTo('App\Models\Tag');

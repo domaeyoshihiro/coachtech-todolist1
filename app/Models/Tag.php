@@ -13,4 +13,6 @@ class Tag extends Model
     public function todos(){
     return $this->hasMany('App\Models\Todo');
     }
+
+    public $timestamps = false;
 }

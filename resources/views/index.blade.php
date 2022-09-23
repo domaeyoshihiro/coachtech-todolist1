@@ -231,8 +231,8 @@
             <input type="text" name="content" value="{{$todo->content}}" class="content__text">
           </td>
           <td>
-            <select  name="tag">
-            @foreach ($todo->tag as $tag)
+            <select  name="tag_id">
+            @foreach ($todo->tag_id as $tag)
                 <option value="{{ $tag->tag }}"></option>
             @endforeach
         </select>

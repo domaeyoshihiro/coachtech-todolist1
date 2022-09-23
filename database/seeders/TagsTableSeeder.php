@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Todo;
+use App\Models\Tag;
 
-class TodosTableSeeder extends Seeder
+class TagsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,12 @@ class TodosTableSeeder extends Seeder
      */
     public function run()
     {
-        $form = [
-            'content' => 'sss',
+        $param = [
+            'tag' => '家事'
+        ];
+        Tag::create($param);
+        $param = [
+            'name' => '運動'
         ];
     }
 }

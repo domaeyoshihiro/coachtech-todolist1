@@ -170,7 +170,11 @@
       <div class="todo__header">
         <h1>タスク検索</h1>
           <div class="login__header">
-
+            @if (Auth::check())
+              <p class="login__detail">「{{$user->name}}」でログイン中</p>
+            @else
+              <p class="login__detail">ログインしてください（<a href="/login">ログイン</a>|<a href="/register">登録</a>）</p>
+            @endif
 
             <form action="{{ route('logout') }}" method="post">
             @csrf
