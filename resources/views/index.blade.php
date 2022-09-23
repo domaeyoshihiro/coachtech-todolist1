@@ -198,7 +198,7 @@
             @csrf
             <input type="text" name="content" class="task__text">
             <td>
-            <select name="tag">
+            <select name="tag_id">
               <option value="1">家事</option>
               <option value="2">勉強</option>
               <option value="3">運動</option>
@@ -232,7 +232,7 @@
           </td>
           <td>
             <select  name="tag">
-            @foreach ($tags as $tag)
+            @foreach ($todo->tag as $tag)
                 <option value="{{ $tag->tag }}"></option>
             @endforeach
         </select>

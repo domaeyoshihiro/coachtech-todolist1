@@ -15,7 +15,7 @@ class AddUserIdToTodosTable extends Migration
     {
         Schema::table('todos', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('user_id')->on('users')->OnDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->OnDelete('cascade');
         });
     }
 

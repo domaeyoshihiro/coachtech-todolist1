@@ -24,7 +24,7 @@ public function create(TodoRequest $request)
     {
         $form = $request->all();
         Todo::create($form);
-        Tag::create($form);
+
         return redirect('/');
     }
 
