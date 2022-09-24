@@ -161,6 +161,20 @@
     color: white;
   }
 
+  .task__tag {
+    border: 1px solid	#DCDCDC;
+    border-radius: 3px;
+    padding: 0 8px;
+  }
+
+  .tag__td {
+    border: 1px solid	#DCDCDC;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 0 10px;
+    height: 35px;
+  }
+
 
 </style>
 
@@ -175,7 +189,6 @@
             @else
               <p class="login__detail">ログインしてください（<a href="/login">ログイン</a>|<a href="/register">登録</a>）</p>
             @endif
-
             <form action="{{ route('logout') }}" method="post">
             @csrf
             <button type="submit" name="lgout-btn" class="logout__btn">ログアウト</button>
@@ -194,7 +207,8 @@
             @csrf
             <input type="text" name="input" value="{{$input}}" class="task__text">
             
-            <select name="tag">
+            <select name="tag_id" class="task__tag">
+              <option value=""></option>
               <option value="1">家事</option>
               <option value="2">勉強</option>
               <option value="3">運動</option>
@@ -217,6 +231,8 @@
         </tr>
         
         @if (@isset($todo))
+        @foreach ($todos as $todo)
+
         <tr>
           <td>
             {{$todo->created_at}}
@@ -228,12 +244,14 @@
           </td>
 
           <td>
-            <select name="tag">
-              <option value="1">家事</option>
-              <option value="2">勉強</option>
-              <option value="3">運動</option>
-              <option value="4">食事</option>
-              <option value="5">移動</option>
+            <select  name="tag_id" class="tag__td">
+              @foreach($tags as $tag)
+                @if ($todo->tag_id == $tag->id)
+                  <option value="{{ $tag->id }}" selected="selected">{{ $tag->tag }}</option>
+                @else
+                  <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
+                @endif
+              @endforeach
             </select>
           </td>
 
@@ -247,6 +265,7 @@
           </form>
           </td>
         </tr>
+        @endforeach
         @endif
       </table>
     </div>

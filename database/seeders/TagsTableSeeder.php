@@ -19,7 +19,20 @@ class TagsTableSeeder extends Seeder
         ];
         Tag::create($param);
         $param = [
-            'name' => '運動'
+            'tag' => '勉強'
         ];
+        Tag::create($param);
+        $param = [
+            'tag' => '運動'
+        ];
+        Tag::create($param);
+        $param = [
+            'tag' => '食事'
+        ];
+        Tag::create($param);
+        $param = [
+            'tag' => '移動'
+        ];
+        Tag::create($param);
     }
 }
