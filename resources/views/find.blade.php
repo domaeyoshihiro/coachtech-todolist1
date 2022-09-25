@@ -231,7 +231,7 @@
         </tr>
         
         @if (@isset($todo))
-        @foreach ($todos as $todo)
+        @forelse ($todos as $todo)
 
         <tr>
           <td>
@@ -265,7 +265,7 @@
           </form>
           </td>
         </tr>
-        @endforeach
+        @endforelse
         @endif
       </table>
     </div>

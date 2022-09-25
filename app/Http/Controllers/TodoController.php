@@ -60,17 +60,31 @@ public function create(TodoRequest $request)
         $todos = Todo::all();
         $tags = Tag::all();
 
-        $todo = Todo::where('content', 'LIKE BINARY',"%{$request->input}%")->get();
-        $tag = Tag::where('tag', $request->input)->get();
+        $content = $request->input('content');
+        $tag_id = $request->input('tag_id');
+
+        if (!empty($content)) {
+            $todos->where('content', 'LIKE', "%{$content}%")->get();
+        }
+
+        if (!empty($tag_id)) {
+            $todos->where('tag_id', $tag_id)->get();
+        }
+
+        if (!empty($content) && !empty($tag_id)) {
+            $todos->where('content', 'LIKE', "%{$content}%")
+            ->orwhere('tag_id', $tag_id)->get();
+        }
 
         $param = [
             'input' => $request->input,
-            'todo' => $todo,
-            'tag' => $tag,
+            'content' => $content,
+            'tag_id' => $tag_id,
             'user' => $user,
             'todos' => $todos,
             'tags' => $tags,
         ];
+
 
         return view('/find', $param);
     }
