@@ -205,7 +205,7 @@
 
           <form action="{{ route('search') }}" method="GET" class="upper__taskbox">
             @csrf
-            <input type="text" name="input" value="{{$input}}" class="task__text">
+            <input type="text" name="content" class="task__text">
             
             <select name="tag_id" class="task__tag">
               <option value=""></option>
