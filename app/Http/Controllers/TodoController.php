@@ -71,11 +71,6 @@ public function create(TodoRequest $request)
             $todos->where('tag_id', $tag_id)->get();
         }
 
-        if (!empty($content) && !empty($tag_id)) {
-            $todos->where('content', 'LIKE', "%{$content}%")
-            ->orwhere('tag_id', $tag_id)->get();
-        }
-
         $param = [
             'input' => $request->input,
             'content' => $content,
