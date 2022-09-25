@@ -80,7 +80,6 @@ public function create(TodoRequest $request)
             'tags' => $tags,
         ];
 
-
         return view('/find', $param);
     }
 }

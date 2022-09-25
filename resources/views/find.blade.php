@@ -230,9 +230,8 @@
           <th>削除</th>
         </tr>
         
-        @if (@isset($todo))
-        @forelse ($todos as $todo)
-
+        @if (@isset($todos))
+        @foreach($todos as $todo)
         <tr>
           <td>
             {{$todo->created_at}}
@@ -265,7 +264,7 @@
           </form>
           </td>
         </tr>
-        @endforelse
+        @endforeach
         @endif
       </table>
     </div>
