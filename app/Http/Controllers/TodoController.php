@@ -65,15 +65,14 @@ public function create(TodoRequest $request)
 
 
         if (!empty($content)) {
-            $todos->where('content', 'LIKE', "%{$content}%");
+            $todos = Todo::where('content', 'LIKE', "%{$content}%");
         }
 
 
         if (!empty($tag_id)) {
-            $todos->where('tag_id', $tag_id);
+            $todos = Todo::where('tag_id', $tag_id);
         }
-
-
+    
         $param = [
             'input' => $request->input,
             'content' => $content,
@@ -82,6 +81,9 @@ public function create(TodoRequest $request)
             'todos' => $todos,
             'tags' => $tags,
         ];
+
+        dd($param);
+
 
         return view('/find', $param);
     }
