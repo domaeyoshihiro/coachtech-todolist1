@@ -15,4 +15,7 @@ Laravelの理解を深めるために作成
 - Laravel　8.x
 
 ## テーブル設計
-<img width="1051" alt="スクリーンショット 2022-09-10 14 25 31" src="https://user-images.githubusercontent.com/110466543/189470498-ba76a7fd-b0a2-487e-b3d4-7b78aeeb54cc.png">
+<img width="842" alt="スクリーンショット 2022-09-26 22 47 44" src="https://user-images.githubusercontent.com/110466543/192293605-4557e1f0-aa09-4d5a-8f95-16e37f0a6692.png">
+
+## ER図
+<img width="499" alt="スクリーンショット 2022-09-26 22 48 02" src="https://user-images.githubusercontent.com/110466543/192293685-a2ff94c8-0a6d-4ba8-98af-d0853070db5d.png">
