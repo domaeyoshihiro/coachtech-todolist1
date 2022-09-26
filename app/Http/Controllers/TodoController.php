@@ -57,21 +57,22 @@ public function create(TodoRequest $request)
     public function search(Request $request)
     {
         $user = Auth::user();
-        $todos = Todo::all();
         $tags = Tag::all();
+        $query = Todo::query();
 
         $content = $request->input('content');
         $tag_id = $request->input('tag_id');
 
-
         if (!empty($content)) {
-            $todos = Todo::where('content', 'LIKE', "%{$content}%");
+            $query -> where('content', 'LIKE', "%{$content}%");
         }
 
 
         if (!empty($tag_id)) {
-            $todos = Todo::where('tag_id', $tag_id);
+            $query -> where('tag_id', $tag_id);
         }
+
+        $todos = $query->get();
     
         $param = [
             'input' => $request->input,
@@ -81,10 +82,7 @@ public function create(TodoRequest $request)
             'todos' => $todos,
             'tags' => $tags,
         ];
-
-        dd($param);
-
-
+        
         return view('/find', $param);
     }
 }

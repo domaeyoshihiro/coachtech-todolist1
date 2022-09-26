@@ -42,8 +42,8 @@
   .task__text {
     border: 1px solid	#DCDCDC;
     border-radius: 3px;
-    width: 80%;
-    height: 30px;
+    width: 75%;
+    height: 40px;
   }
 
   .search__btn {
