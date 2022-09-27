@@ -47,7 +47,7 @@ class RegisterRequest extends FormRequest
             'password.max' => 'パスワードは191文字以下で入力してください',
             'password.confirmed' => 'パスワードが一致していません',
 
-            'password_confirmation' => '確認用パスワードが入力されていません',
+            'password_confirmation.required' => '確認用パスワードが入力されていません',
         ];
     }
 }
