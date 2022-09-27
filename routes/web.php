@@ -11,7 +11,7 @@ Route::get('/find', [TodoController::class, 'find']);
 Route::get('/search', [TodoController::class, 'search'])->name('search');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('/');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

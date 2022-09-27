@@ -195,12 +195,12 @@
             <button type="submit" name="lgout-btn" class="logout__btn">ログアウト</button>
             </form>
           </div>
-      </div>
+        </div>
 
-      <form action="/find" method="GET" class="find-btn">
-        @csrf
-        <button type="submit" name="find-btn" class="find__btn">タスク検索</button>
-      </form>
+        <form action="/find" method="GET" class="find-btn">
+          @csrf
+          <button type="submit" name="find-btn" class="find__btn">タスク検索</button>
+        </form>
 
         <div class="textbox_add-btn">
           <ul>
@@ -219,58 +219,56 @@
               <option value="4" name="tag">食事</option>
               <option value="5" name="tag">移動</option>
             </select>
-          </td>
-
+            </td>
             <button type="submit" name="create-btn" class="create__btn">追加</button>
           </form>
-    </div>
+        </div>
 
-    <div class="bottom_main">
-      <table>
-        <tr>
-          <th>作成日</th>
-          <th>タスク名</th>
-          <th>タグ</th>
-          <th>更新</th>
-          <th>削除</th>
-        </tr>
-        @foreach ($todos as $todo)
-        <tr>
-          <td>
-            {{$todo->created_at}}
-          </td>
-          <form action="/edit/{{ $todo->id }}" method="POST">
-            @csrf
-          <td>
-            <input type="text" name="content" value="{{$todo->content}}" class="content__text">
-          </td>
-
-          <td>
-            <select  name="tag_id" class="tag__td">
-              @foreach($tags as $tag)
-                @if ($todo->tag_id == $tag->id)
-                  <option value="{{ $tag->id }}" selected="selected">{{ $tag->tag }}</option>
-                @else
-                  <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
-                @endif
-              @endforeach
-            </select>
-          </td>
-
-          <td>
-            <button type="submit" name="update-btn" class="update__btn">更新</button>
-          </td>
-          </form>
-          <td><form action="/delete/{{ $todo->id }}" method="POST">
-            @csrf
-            <button type="submit" name="remove-btn" class="delete__btn">削除</button>
-          </form>
-          </td>
-        </tr>
-        @endforeach
-      </table>
+        <div class="bottom_main">
+          <table>
+            <tr>
+              <th>作成日</th>
+              <th>タスク名</th>
+              <th>タグ</th>
+              <th>更新</th>
+              <th>削除</th>
+            </tr>
+            @foreach ($todos as $todo)
+            <tr>
+              <td>
+                {{$todo->created_at}}
+              </td>
+              <form action="/edit/{{ $todo->id }}" method="POST">
+                @csrf
+              <td>
+                <input type="text" name="content" value="{{$todo->content}}" class="content__text">
+              </td>
+              <td>
+                <select  name="tag_id" class="tag__td">
+                  @foreach($tags as $tag)
+                    @if ($todo->tag_id == $tag->id)
+                      <option value="{{ $tag->id }}" selected="selected">{{ $tag->tag }}</option>
+                    @else
+                      <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
+                    @endif
+                  @endforeach
+                </select>
+              </td>
+              <td>
+                <button type="submit" name="update-btn" class="update__btn">更新</button>
+              </td>
+              </form>
+              <td>
+                <form action="/delete/{{ $todo->id }}" method="POST">
+                @csrf
+                <button type="submit" name="remove-btn" class="delete__btn">削除</button>
+                </form>
+              </td>
+            </tr>
+            @endforeach
+          </table>
+        </div>
     </div>
   </div>
-</div>
 </body>
 </html>

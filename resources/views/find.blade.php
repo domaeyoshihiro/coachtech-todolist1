@@ -189,10 +189,10 @@
             @else
               <p class="login__detail">ログインしてください（<a href="/login">ログイン</a>|<a href="/register">登録</a>）</p>
             @endif
-            <form action="{{ route('logout') }}" method="post">
-            @csrf
-            <button type="submit" name="lgout-btn" class="logout__btn">ログアウト</button>
-            </form>
+              <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button type="submit" name="lgout-btn" class="logout__btn">ログアウト</button>
+              </form>
           </div>
       </div>
 
@@ -218,61 +218,60 @@
           
             <button type="submit" name="search-btn" class="search__btn">検索</button>
           </form>
-      
-    </div>
-    <div class="bottom_main">
-      <table>
-        <tr>
-          <th>作成日</th>
-          <th>タスク名</th>
-          <th>タグ</th>
-          <th>更新</th>
-          <th>削除</th>
-        </tr>
+        </div>
+
+        <div class="bottom_main">
+          <table>
+          <tr>
+            <th>作成日</th>
+            <th>タスク名</th>
+            <th>タグ</th>
+            <th>更新</th>
+            <th>削除</th>
+          </tr>
         
-        @if (@isset($todos))
-        @foreach($todos as $todo)
-        <tr>
-          <td>
-            {{$todo->created_at}}
-          </td>
-          <form action="/edit/{{ $todo->id }}" method="POST">
-            @csrf
-          <td>
-            <input type="text" name="content" value="{{$todo->content}}" class="content__text">
-          </td>
-
-          <td>
-            <select  name="tag_id" class="tag__td">
-              @foreach($tags as $tag)
-                @if ($todo->tag_id == $tag->id)
-                  <option value="{{ $tag->id }}" selected="selected">{{ $tag->tag }}</option>
-                @else
-                  <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
-                @endif
-              @endforeach
-            </select>
-          </td>
-
-          <td>
-            <button type="submit" name="update-btn" class="update__btn">更新</button>
-          </td>
-          </form>
-          <td><form action="/delete/{{ $todo->id }}" method="POST">
-            @csrf
-            <button type="submit" name="remove-btn" class="delete__btn">削除</button>
-          </form>
-          </td>
-        </tr>
-        @endforeach
-        @endif
-      </table>
+          @if (@isset($todos))
+          @foreach($todos as $todo)
+          <tr>
+            <td>
+              {{$todo->created_at}}
+            </td>
+              <form action="/edit/{{ $todo->id }}" method="POST">
+              @csrf
+            <td>
+              <input type="text" name="content" value="{{$todo->content}}" class="content__text">
+            </td>
+            <td>
+              <select  name="tag_id" class="tag__td">
+                @foreach($tags as $tag)
+                  @if ($todo->tag_id == $tag->id)
+                    <option value="{{ $tag->id }}" selected="selected">{{ $tag->tag }}</option>
+                  @else
+                    <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
+                  @endif
+                @endforeach
+              </select>
+            </td>
+            <td>
+              <button type="submit" name="update-btn" class="update__btn">更新</button>
+            </td>
+              </form>
+            <td>
+              <form action="/delete/{{ $todo->id }}" method="POST">
+              @csrf
+              <button type="submit" name="remove-btn" class="delete__btn">削除</button>
+              </form>
+            </td>
+          </tr>
+          @endforeach
+          @endif
+          </table>
+        </div>
     </div>
+      <form action="/" method="GET" class="back-btn">
+        @csrf
+        <button type="submit" name="back-btn" class="back__btn">戻る</button>
+      </form>
   </div>
-    <form action="/" method="GET" class="back-btn">
-      @csrf
-      <button type="submit" name="back-btn" class="back__btn">戻る</button>
-    </form>
-</div>
 </body>
 </html>
